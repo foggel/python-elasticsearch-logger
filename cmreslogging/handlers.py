@@ -330,6 +330,7 @@ class CMRESHandler(logging.Handler):
             if key not in CMRESHandler.__LOGGING_FILTER_FIELDS:
                 rec[key] = "" if value is None else value
         rec[self.default_timestamp_field_name] = self.__get_es_datetime_str(record.created)
+        rec["msg"] = record.getMessage()
         with self._buffer_lock:
             self._buffer.append(rec)
 
